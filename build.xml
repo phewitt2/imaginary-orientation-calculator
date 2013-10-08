@@ -38,6 +38,7 @@
   <!-- for just java files use *.java -->
   <target name="studentOrientation" depends="prepare">
   <javac srcdir="${src}"
+         includeantruntime="false"
          includes="studentOrientation/**"
          excludes="**/package.html"
          destdir="${classes}"
