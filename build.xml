@@ -1,0 +1,70 @@
+<!--
+
+    This is the standard build.xml used for all Design Patterns assignments.
+
+    To create a build.xml for a new assignment, do a search and replace in Vim.
+    For example,
+
+        :%s/studentOrientation/<new_assignment_name>/g
+
+-->
+
+<project name="studentOrientation" default="compile" basedir=".">
+  <property name="build.compiler" value="modern"/>
+  <property name="src"            value="src"/>
+  <property name="BUILD"          value="build"/>
+  <property name="classes"        value="${BUILD}/classes"/>
+
+  <target name="archive" >
+    <mkdir dir="${BUILD}/dist"/>    
+    <tar destfile="${BUILD}/dist/studentOrientation.tar" basedir="${src}"/>
+    <gzip src="${BUILD}/dist/studentOrientation.tar" destfile="${BUILD}/dist/studentOrientation.tar.gz"/>
+  </target>
+
+  <target name="compile" depends="studentOrientation"/>
+
+  <target name="clean">
+    <delete dir="${BUILD}"/>
+  </target>
+
+  <!-- Prepare target directories -->
+  <target name="prepare">
+    <mkdir dir="${BUILD}"/>
+    <mkdir dir="${classes}"/>
+  </target>
+
+  <!-- ** means all subdirectories as well -->
+  <!-- * means all files in the current directory -->
+  <!-- for just java files use *.java -->
+  <target name="studentOrientation" depends="prepare">
+  <javac srcdir="${src}"
+         includes="studentOrientation/**"
+         excludes="**/package.html"
+         destdir="${classes}"
+         classpath="${classes}"
+         debug="on"
+         optimize="on"
+         deprecation="off"/>
+  </target>
+
+  <target name="jar">
+    <mkdir dir="${BUILD}/jar"/>
+    <jar destfile="${BUILD}/jar/studentOrientation.jar" basedir="${BUILD}/classes">
+      <manifest>
+        <attribute name="Main-Class" value="studentOrientation.driver.Driver"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="run" depends="jar">
+  <java jar="${BUILD}/jar/studentOrientation.jar"  fork="true">
+<!--
+
+    Enter command line arguments here. For example,
+
+        <arg value="some argument"/>
+  
+-->
+  </java>
+  </target>
+</project>
