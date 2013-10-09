@@ -1,0 +1,15 @@
+package studentOrientation.util;
+
+//Ain't nobody got time for this
+public interface TimeInterface{
+
+/**
+* Convert from base unit (minutes) to concrete units.
+*/
+  public void baseToConcrete();
+/**
+* Convert from concrete units to base unit (minutes).
+*/
+  public void concreteToBase();
+
+}
