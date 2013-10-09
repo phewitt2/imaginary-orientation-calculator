@@ -1,0 +1,48 @@
+package studentOrientation.util;
+
+public class MinutesTime{
+
+  private double myConcreteTime;
+  private double myBaseTime;
+
+  public MinutesTime(double minutesIn){
+    myConcreteTime = minutesIn;
+    myBaseTime = 0;
+    this.concreteToBase();
+  }
+  
+  public void concreteToBase(){
+    //unit conversion minutes to minutes = x1
+    myBaseTime = myConcreteTime * 1;
+    return;
+  }
+  public void baseToConcrete(){
+    //undo unit conversion
+    myConcreteTime = myBaseTime / 1;
+    return;
+  }
+  
+  //may choose to put these in the interface too,
+  //don't allow setting the concrete time
+  public void setBaseTime(double myNewBaseTime){
+    myBaseTime = myNewBaseTime;
+    return;
+  }
+  
+  public double getBaseTime(){
+    double ret;
+    ret = myBaseTime;
+    return ret;
+  }
+  
+  
+  public String toString(){
+    String ret = "";
+    
+    //update concrete time in case base time has been modified
+    this.baseToConcrete();
+    ret += (myConcreteTime.toString() + " minutes.");
+    return ret;
+  }
+
+}
